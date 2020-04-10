@@ -1,6 +1,16 @@
 .signin-page {
     width:850px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin: 20px auto;
+
+    &-link {
+        margin: 30px auto;
+        text-align: center;
+        text-transform: uppercase;
+        color: #000;
+        font-weight: 500;
+        text-decoration: underline;
+    }
 }

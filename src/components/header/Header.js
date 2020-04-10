@@ -23,8 +23,8 @@ const Header = ({ existingUser }) => {
             Sign out
           </div>
         ) : (
-          <Link to="/signin" className="link">
-            SIGN IN
+          <Link to="/signup" className="link">
+            SIGN UP
           </Link>
         )}
       </div>

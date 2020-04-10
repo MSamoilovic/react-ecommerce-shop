@@ -1,13 +1,15 @@
 import React from "react";
 import "./SigninPage.scss";
-import SigninForm from "../../sign-in/Signin";
+import {Link} from 'react-router-dom'
 import SignupForm from '../../sign-up/Signup'
 
 const SigninPage = () => {
   return (
     <div className="signin-page">
-      <SigninForm />
       <SignupForm />
+      <Link to="/signin" className="signin-page-link">
+        I already have an account
+      </Link>
     </div>
   );
 };

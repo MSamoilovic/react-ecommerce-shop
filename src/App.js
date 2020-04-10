@@ -5,6 +5,7 @@ import HomePage from "./components/pages/homepage/Homepage";
 import Shop from "./components/pages/shop/Shop";
 import Header from "./components/header/Header";
 import SigninPage from "./components/pages/sign-in/SigninPage";
+import SigninForm from './components/sign-in/Signin'
 import { auth, getUserProfile } from "./firebase/firebase-utils";
 
 class App extends React.Component {
@@ -53,7 +54,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={Shop} />
-          <Route path="/signin" component={SigninPage} />
+          <Route path="/signup" component={SigninPage} />
+          <Route path="/signin" component={SigninForm} />
         </Switch>
       </div>
     );
