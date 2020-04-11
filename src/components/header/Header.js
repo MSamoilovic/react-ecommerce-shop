@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/Zamy.jpg";
 import "./Header.scss";
+//connect vezuje komponentu sa redux store
+import {connect} from 'react-redux'
 import { auth } from "../../firebase/firebase-utils";
 
-const Header = ({ existingUser }) => {
+const Header = ({ currentUser }) => {
   /* console.log(Logo); */
   return (
     <div className="header">
@@ -18,7 +20,7 @@ const Header = ({ existingUser }) => {
         <Link to="/contact" className="link">
           CONTACT
         </Link>
-        {existingUser ? (
+        {currentUser ? (
           <div className="link" onClick={() => auth.signOut()}>
             Sign out
           </div>
@@ -32,4 +34,10 @@ const Header = ({ existingUser }) => {
   );
 };
 
-export default Header;
+//mapStatetoProps funkcija povlaci state iz userReducera, koji je deo mainReducera
+const mapStatetoProps = state => ({
+  //prosledjeni state je mainReducer
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStatetoProps)(Header);
