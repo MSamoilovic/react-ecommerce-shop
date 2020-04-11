@@ -5,21 +5,17 @@ import HomePage from "./components/pages/homepage/Homepage";
 import Shop from "./components/pages/shop/Shop";
 import Header from "./components/header/Header";
 import SigninPage from "./components/pages/sign-in/SigninPage";
-import SigninForm from './components/sign-in/Signin'
+import SigninForm from "./components/sign-in/Signin";
 import { auth, getUserProfile } from "./firebase/firebase-utils";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/user-actions";
 
 class App extends React.Component {
   unsubscribeObservable = null;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentUser: null,
-    };
-  }
-
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeObservable = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await getUserProfile(userAuth);
@@ -29,17 +25,12 @@ class App extends React.Component {
           /* console.log(snapshot);
           console.log(snapshot.data()); */
 
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data()
-            }
-          })
+          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
         });
       }
 
       //
-      this.setState({currentUser: userAuth})
+      setCurrentUser(userAuth);
     });
   }
 
@@ -62,4 +53,9 @@ class App extends React.Component {
   }
 }
 
-export default App;
+//mapDispatchToProps poziva akciju iz reducera, koju mozemo iskoristit kao props
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);
