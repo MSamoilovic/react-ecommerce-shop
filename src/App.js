@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/pages/homepage/Homepage";
 import Shop from "./components/pages/shop/Shop";
@@ -24,12 +24,10 @@ class App extends React.Component {
         userRef.onSnapshot((snapshot) => {
           /* console.log(snapshot);
           console.log(snapshot.data()); */
-
           setCurrentUser({ id: snapshot.id, ...snapshot.data() });
         });
       }
 
-      //
       setCurrentUser(userAuth);
     });
   }
@@ -45,17 +43,22 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={Shop} />
-          <Route path="/signup" component={SigninPage} />
-          <Route path="/signin" component={SigninForm} />
+          <Route path="/signup" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SigninPage />)} />
+          <Route path="/signin" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SigninForm />)} />
         </Switch>
       </div>
     );
   }
 }
 
+
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+})
+
 //mapDispatchToProps poziva akciju iz reducera, koju mozemo iskoristit kao props
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
