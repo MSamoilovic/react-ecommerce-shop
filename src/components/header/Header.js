@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/Zamy.jpg";
 import "./Header.scss";
 //connect vezuje komponentu sa redux store
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase-utils";
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropdown from "../cart-dropdown/CartDropdown";
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hiddenCart }) => {
   /* console.log(Logo); */
   return (
     <div className="header">
@@ -29,15 +31,18 @@ const Header = ({ currentUser }) => {
             SIGN UP
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hiddenCart ? null : <CartDropdown />}
     </div>
   );
 };
 
 //mapStatetoProps funkcija povlaci state iz userReducera, koji je deo mainReducera
-const mapStatetoProps = state => ({
+const mapStatetoProps = (state) => ({
   //prosledjeni state je mainReducer
-  currentUser: state.user.currentUser
-})
+  currentUser: state.user.currentUser,
+  hiddenCart: state.cart.hidden,
+});
 
 export default connect(mapStatetoProps)(Header);
