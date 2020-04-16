@@ -1,5 +1,6 @@
 import React from "react";
 import "./CollectionItem.scss";
+import SubmitButton from '../submit-button/SubmitButton'
 
 const CollectionItem = ({id, price, name, imageUrl }) => (
   <div className="collection-item-container">
@@ -13,6 +14,7 @@ const CollectionItem = ({id, price, name, imageUrl }) => (
       <span className="collection-item-container-info_name">{name}</span>
       <span className="collection-item-container-info_price">{price}</span>
     </div>
+    <SubmitButton inverted>Add to Cart</SubmitButton>
   </div>
 );
 
