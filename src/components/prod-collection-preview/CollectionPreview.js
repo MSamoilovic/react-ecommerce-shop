@@ -6,9 +6,9 @@ const CollectionPreview = ({ title, items }) => (
   <div className="preview-container">
     <h1 className="preview-container_title">{title.toUpperCase()}</h1>
     <div className="preview-container_item">
-      {items.slice(0, 4).map(({id, ...restOfProps}) => (
+      {items.slice(0, 4).map((item) => (
         //rest of props menja imageUrl={imageUrl}, name={name}
-        <CollectionItem key={id} {...restOfProps} />
+        <CollectionItem key={item.id} item={item} />
       ))}
     </div>
   </div>
