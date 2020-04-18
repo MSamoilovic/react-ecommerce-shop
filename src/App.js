@@ -9,6 +9,7 @@ import SigninForm from "./components/sign-in/Signin";
 import { auth, getUserProfile } from "./firebase/firebase-utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-actions";
+import CheckoutPage from './components/pages/checkout/Checkout'
 
 class App extends React.Component {
   unsubscribeObservable = null;
@@ -45,6 +46,7 @@ class App extends React.Component {
           <Route path="/shop" component={Shop} />
           <Route path="/signup" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SigninPage />)} />
           <Route path="/signin" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SigninForm />)} />
+          <Route path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );
