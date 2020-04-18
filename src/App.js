@@ -10,6 +10,7 @@ import { auth, getUserProfile } from "./firebase/firebase-utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-actions";
 import CheckoutPage from './components/pages/checkout/Checkout'
+import { selectCurrentUser } from './redux/user/user-selectors'
 
 class App extends React.Component {
   unsubscribeObservable = null;
@@ -54,8 +55,8 @@ class App extends React.Component {
 }
  
 
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = (state) => ({
+  currentUser: selectCurrentUser(state)
 })
 
 //mapDispatchToProps poziva akciju iz reducera, koju mozemo iskoristit kao props

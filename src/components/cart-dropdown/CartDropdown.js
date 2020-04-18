@@ -3,6 +3,7 @@ import "./CartDropdown.scss";
 import SubmitButton from "../submit-button/SubmitButton";
 import CartItem from "../cart-item/CartItem";
 import { connect } from "react-redux";
+import { selectCartItems } from '../../redux/cart/cart-selectors'
 import { withRouter } from "react-router-dom";
 
 const CartDropdown = ({ cartItems, history }) => (
@@ -19,7 +20,7 @@ const CartDropdown = ({ cartItems, history }) => (
 );
 
 const mapStateToProps = (state) => ({
-  cartItems: state.cart.cartItems,
+  cartItems: selectCartItems(state),
 });
 
 export default withRouter(connect(mapStateToProps)(CartDropdown));

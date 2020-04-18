@@ -9,6 +9,11 @@ export const selectCartItems = createSelector(
   (cart) => cart.cartItems
 );
 
+export const selectCartHidden = createSelector(
+    [selectCart],
+    (cart) => cart.hidden
+)
+
 //Memoizovani selektor koji koristi vec postojeci memoizovani selektor
 export const selectCartItemsCount = createSelector(
   [selectCartItems],

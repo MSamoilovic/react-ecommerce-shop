@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase-utils";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
+import {selectCurrentUser} from '../../redux/user/user-selectors'
+import {selectCartHidden} from '../../redux/cart/cart-selectors'
 
 const Header = ({ currentUser, hiddenCart }) => {
   /* console.log(Logo); */
@@ -41,8 +43,8 @@ const Header = ({ currentUser, hiddenCart }) => {
 //mapStatetoProps funkcija povlaci state iz userReducera, koji je deo mainReducera
 const mapStatetoProps = (state) => ({
   //prosledjeni state je mainReducer
-  currentUser: state.user.currentUser,
-  hiddenCart: state.cart.hidden,
+  currentUser: selectCurrentUser(state),
+  hiddenCart: selectCartHidden(state),
 });
 
 export default connect(mapStatetoProps)(Header);
