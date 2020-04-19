@@ -10,9 +10,9 @@ export const selectCartItems = createSelector(
 );
 
 export const selectCartHidden = createSelector(
-    [selectCart],
-    (cart) => cart.hidden
-)
+  [selectCart],
+  (cart) => cart.hidden
+);
 
 //Memoizovani selektor koji koristi vec postojeci memoizovani selektor
 export const selectCartItemsCount = createSelector(
@@ -23,4 +23,11 @@ export const selectCartItemsCount = createSelector(
         accumulatedQuantity + cartItem.quantity,
       0
     )
+);
+
+export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
+  cartItems.reduce(
+    (accumulatedPrice, cartItem) => accumulatedPrice + cartItem.price,
+    0
+  )
 );
