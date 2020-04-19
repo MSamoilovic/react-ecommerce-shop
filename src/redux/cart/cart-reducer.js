@@ -1,4 +1,4 @@
-import { addToCartItem } from "./cart-utility";
+import { addToCartItem, removeItemFromCheckout } from "./cart-utility";
 
 const INITIAL_STATE = {
   hidden: true,
@@ -23,6 +23,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: state.cartItems.filter(
           (cartItem) => cartItem.id !== action.payload.id
         ),
+      };
+    case "REMOVE_FROM_CHECKOUT":
+      return {
+        ...state,
+        cartItems: removeItemFromCheckout(state.cartItems, action.payload),
       };
     default:
       return state;
