@@ -10,9 +10,9 @@ const mapStateToProps = (state) => ({
 
 const Directory = ({ sections }) => (
   <div className="directory-menu">
-    {sections.map(({ title, imageURL, id, size }) => {
+    {sections.map(({ title, imageURL, id, size, linkUrl }) => {
       return (
-        <MenuItem key={id} title={title} imageURL={imageURL} size={size} />
+        <MenuItem key={id} title={title} imageURL={imageURL} size={size} linkUrl={linkUrl} />
       );
     })}
   </div>

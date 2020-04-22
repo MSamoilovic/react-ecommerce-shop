@@ -1,7 +1,7 @@
 import React from "react";
 import "./Menu-item.scss";
 
-const MenuItem = ({ title, imageURL, size }) => (
+const MenuItem = ({ title, imageURL, size, linkUrl }) => (
   <div className={`${size} menu-item`}>
     <div
       className="background-image"
