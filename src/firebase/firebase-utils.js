@@ -22,7 +22,7 @@ provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 //Cuvanje usera u Firestore
-export const getUserProfile = async (userAuth, addData) => {
+export const getUserProfile = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   //Kreira dokumentRef na usera pod id koji je u linku
@@ -39,7 +39,7 @@ export const getUserProfile = async (userAuth, addData) => {
         displayName,
         email,
         createdAt,
-        ...addData,
+        ...additionalData,
       });
     } catch (err) {
       console.log("Error occured", err.message);
@@ -50,6 +50,23 @@ export const getUserProfile = async (userAuth, addData) => {
   }
 
   return userRefference;
+};
+
+//Kreiranje kolekcije i upisavanje dokumenata
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  //Kreira queryRefference objekat na tu kolekciju, bez obzira sto nema data u njoj
+  const collectionRef = firestore.collection(collectionKey);
+  //Kreira se batch, za visestruki upis u bazu
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
 };
 
 export default firebase;
