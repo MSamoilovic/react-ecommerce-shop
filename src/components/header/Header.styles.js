@@ -1,11 +1,5 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-const sharedStyles = css`
-  padding: 10px 15px;
-  cursor: pointer;
-  text-transform: uppercase;
-`;
 
 export const HeaderImage = styled.img`
   height: 100%;
@@ -35,9 +29,7 @@ export const LinkContainer = styled.div`
 `;
 
 export const LinkOption = styled(Link)`
-  ${sharedStyles}
-`;
-
-export const divOption = styled.div`
-  ${sharedStyles}
+  padding: 10px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
 `;

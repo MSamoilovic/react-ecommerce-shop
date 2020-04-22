@@ -13,8 +13,7 @@ import {
   LogoContainer,
   LinkContainer,
   LinkOption,
-  divOption,
-  HeaderImage
+  HeaderImage,
 } from "./Header.styles";
 
 const Header = ({ currentUser, hiddenCart }) => {
@@ -28,7 +27,9 @@ const Header = ({ currentUser, hiddenCart }) => {
         <LinkOption to="/shop">SHOP</LinkOption>
         <LinkOption to="/contact">CONTACT</LinkOption>
         {currentUser ? (
-          <divOption onClick={() => auth.signOut()}>Sign out</divOption>
+          <LinkOption as="div" onClick={() => auth.signOut()}>
+            Sign out
+          </LinkOption>
         ) : (
           <LinkOption to="/signup">SIGN UP</LinkOption>
         )}
