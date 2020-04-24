@@ -8,11 +8,11 @@ const mapStateToProps = (state) => ({
   collections: selectCollectionArr(state),
 });
 
-const CollectionOverview = ({ collections }) => {
+const CollectionOverview = (props) => {
   return (
     <div>
-      {collections.map((col) => (
-        <CollectionPreview key={col.id} title={col.title} items={col.items} />
+      {props.collections.map(({id, ...otherProps}) => (
+        <CollectionPreview key={id} {...otherProps} />
       ))}
     </div>
   );

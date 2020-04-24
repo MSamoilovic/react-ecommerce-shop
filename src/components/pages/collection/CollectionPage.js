@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
+
   return (
     <div className="collection-page">
       <h2 className="title">{title}</h2>
