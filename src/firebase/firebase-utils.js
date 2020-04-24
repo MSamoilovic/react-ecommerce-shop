@@ -69,4 +69,34 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export default firebase;
+//konvertovanje snapshota u objekat prikladan za upotrebu na frontendu
+
+export const convertSnapshotToObject = (collection) => {
+  const transformedArray = collection.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      //encodeURI postavlja string da bude pogodan za upotrebu URL
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  //console.log(transformedArray)
+
+  //Reduce metod kreira objekat {hats: {clanovi niza}, jackets:{clanovi}...}
+  const transformedObject = transformedArray.reduce(
+    (accumulatedValue, collection) => {
+      accumulatedValue[collection.title.toLowerCase()] = collection;
+      return accumulatedValue;
+    },
+    {}
+  );
+
+  return transformedObject
+  //console.log(transformedObject);
+};
+
+//export default firebase;

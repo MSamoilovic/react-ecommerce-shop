@@ -6,25 +6,17 @@ import Shop from "./components/pages/shop/Shop";
 import Header from "./components/header/Header";
 import SigninPage from "./components/pages/sign-in/SigninPage";
 import SigninForm from "./components/sign-in/Signin";
-import {
-  auth,
-  getUserProfile,
-  addCollectionAndDocuments,
-} from "./firebase/firebase-utils";
+import { auth, getUserProfile } from "./firebase/firebase-utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-actions";
 import CheckoutPage from "./components/pages/checkout/Checkout";
 import { selectCurrentUser } from "./redux/user/user-selectors";
-import { selectCollectionArr } from "./redux/shop/shop-selectors";
 
 class App extends React.Component {
   unsubscribeObservable = null;
 
   componentDidMount() {
-    const { setCurrentUser, collectionArr } = this.props;
-    
-    const batchedCollectionArr = collectionArr.map(({title, items}) => ({title, items}));
-    //console.log(batchedCollectionArr)
+    const { setCurrentUser } = this.props;
 
     this.unsubscribeObservable = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -39,10 +31,6 @@ class App extends React.Component {
       }
 
       setCurrentUser(userAuth);
-      addCollectionAndDocuments(
-        "collections",
-        batchedCollectionArr
-      ); 
     });
   }
 
@@ -78,7 +66,6 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
-  collectionArr: selectCollectionArr(state),
 });
 
 //mapDispatchToProps poziva akciju iz reducera, koju mozemo iskoristit kao props
