@@ -19,6 +19,8 @@ export default collectionOverviewContainer
 // u Spinner komponentu koja je HOC i koja renderuje CollectionOverview
 //vezano za isLoading vrednost
 
+// Container komponenta ne vrsi nikakav render vec samo prosledjuje props u child komponentu
+
 //Compose je wrapper funkcija iz Redux biblioteke koja omogucava
 //pozivanje funkcija s desna na levo koje koriste CollectionOverview kao parametar
 //Sto znaci da prvo poziva Spinner kao HOC pa zatim connect(mapStateToProps)
