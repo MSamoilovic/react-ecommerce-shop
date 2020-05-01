@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import "./Shop.scss";
 import CollectionPageContainer from "../collection/CollectionPageContainer";
 import { connect } from "react-redux";
-import { fetchCollectionStartAsync } from "../../../redux/shop/shop-actions";
+import { fetchCollectionStart } from "../../../redux/shop/shop-actions";
 import CollectionOverviewContainer from "../../collection-overview/CollectionOverviewContainer";
 
 /* const CollectionOverviewWithSpinner = Spinner(CollectionOverview); */
@@ -12,7 +12,7 @@ import CollectionOverviewContainer from "../../collection-overview/CollectionOve
 
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollection: () => dispatch(fetchCollectionStartAsync()),
+  fetchCollection: () => dispatch(fetchCollectionStart()),
 });
 
 class Shop extends React.Component {
