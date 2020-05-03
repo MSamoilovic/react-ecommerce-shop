@@ -1,7 +1,4 @@
-import {
-  firestore,
-  convertSnapshotToObject,
-} from "../../firebase/firebase-utils";
+
 
 export const fetchCollectionStart = () => ({
   type: "FETCH_COLLECTION_START",
@@ -17,7 +14,7 @@ export const fetchCollectionFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const fetchCollectionStartAsync = () => {
+/* export const fetchCollectionStartAsync = () => {
   return (dispatch) => {
     //Ovde ubaciti ceo kod koji ide u Shop Component Did Mount
     const collectionRef = firestore.collection("collections");
@@ -32,3 +29,4 @@ export const fetchCollectionStartAsync = () => {
       .catch((err) => dispatch(fetchCollectionFailure(err.message)));
   };
 };
+ */

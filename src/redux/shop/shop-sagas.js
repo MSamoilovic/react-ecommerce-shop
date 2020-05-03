@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import {
   firestore,
   convertSnapshotToObject,
@@ -17,6 +17,6 @@ export function* fetchCollectionAsync() {
   }
 }
 
-export function* fetchCollectionStart() {
-  yield takeEvery("FETCH_COLLECTION_START", fetchCollectionAsync);
+export function* fetchCollectionStartSaga() {
+  yield takeLatest("FETCH_COLLECTION_START", fetchCollectionAsync);
 }
