@@ -6,7 +6,6 @@ import Shop from "./components/pages/shop/Shop";
 import Header from "./components/header/Header";
 import SigninPage from "./components/pages/sign-in/SigninPage";
 import SigninForm from "./components/sign-in/Signin";
-import { auth, getUserProfile } from "./firebase/firebase-utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-actions";
 import CheckoutPage from "./components/pages/checkout/Checkout";
@@ -16,22 +15,20 @@ class App extends React.Component {
   unsubscribeObservable = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    //const { setCurrentUser } = this.props;
 
-    this.unsubscribeObservable = auth.onAuthStateChanged(async (userAuth) => {
+    /* this.unsubscribeObservable = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await getUserProfile(userAuth);
 
         //ukoliko se desi update podataka u Firebase, nakon auth
         userRef.onSnapshot((snapshot) => {
-          /* console.log(snapshot);
-          console.log(snapshot.data()); */
           setCurrentUser({ id: snapshot.id, ...snapshot.data() });
         });
       }
 
       setCurrentUser(userAuth);
-    });
+    }); */
   }
 
   componentWillUnmount() {
