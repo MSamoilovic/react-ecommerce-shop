@@ -7,28 +7,15 @@ import Header from "./components/header/Header";
 import SigninPage from "./components/pages/sign-in/SigninPage";
 import SigninForm from "./components/sign-in/Signin";
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/user-actions";
 import CheckoutPage from "./components/pages/checkout/Checkout";
 import { selectCurrentUser } from "./redux/user/user-selectors";
+import { checkUserSession } from './redux/user/user-actions'
 
 class App extends React.Component {
-  unsubscribeObservable = null;
 
   componentDidMount() {
-    //const { setCurrentUser } = this.props;
-
-    /* this.unsubscribeObservable = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await getUserProfile(userAuth);
-
-        //ukoliko se desi update podataka u Firebase, nakon auth
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
-        });
-      }
-
-      setCurrentUser(userAuth);
-    }); */
+    const { checkUserSession} = this.props;
+    checkUserSession()
   }
 
   componentWillUnmount() {
@@ -65,9 +52,8 @@ const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
 });
 
-//mapDispatchToProps poziva akciju iz reducera, koju mozemo iskoristit kao props
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
+ checkUserSession: () => dispatch(checkUserSession())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

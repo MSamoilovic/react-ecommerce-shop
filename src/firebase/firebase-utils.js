@@ -95,8 +95,17 @@ export const convertSnapshotToObject = (collection) => {
     {}
   );
 
-  return transformedObject
+  return transformedObject;
   //console.log(transformedObject);
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe()
+      resolve(user)
+    }, reject);
+  });
 };
 
 //export default firebase;
