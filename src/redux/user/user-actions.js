@@ -16,3 +16,18 @@ export const googleSiginFailure = (error) => ({
     type: 'GOOGLE_SIGNIN_FAILURE',
     payload: error
 })
+
+export const emailSigninStart = (emailAndPasswordObject) => ({
+    type:'EMAIL_SIGNIN_START',
+    payload: emailAndPasswordObject
+})
+
+export const emailSigninSuccess = (user) => ({
+    type: 'EMAIL_SIGNIN_SUCCESS',
+    payload: user
+})
+
+export const emailSigninFailure = (error) => ({
+    type: 'EMAIL_SIGNIN_FAILURE',
+    payload: error
+})
