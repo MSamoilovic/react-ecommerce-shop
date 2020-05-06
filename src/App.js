@@ -9,13 +9,12 @@ import SigninForm from "./components/sign-in/Signin";
 import { connect } from "react-redux";
 import CheckoutPage from "./components/pages/checkout/Checkout";
 import { selectCurrentUser } from "./redux/user/user-selectors";
-import { checkUserSession } from './redux/user/user-actions'
+import { checkUserSession } from "./redux/user/user-actions";
 
 class App extends React.Component {
-
   componentDidMount() {
-    const { checkUserSession} = this.props;
-    checkUserSession()
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -53,7 +52,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
- checkUserSession: () => dispatch(checkUserSession())
-})
+  checkUserSession: () => dispatch(checkUserSession()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

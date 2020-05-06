@@ -3,11 +3,11 @@ import Logo from "../../assets/Zamy.jpg";
 //import "./Header.scss";
 //connect vezuje komponentu sa redux store
 import { connect } from "react-redux";
-import { auth } from "../../firebase/firebase-utils";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { selectCartHidden } from "../../redux/cart/cart-selectors";
+import { signOutStart } from '../../redux/user/user-actions'
 import {
   HeaderContainer,
   LogoContainer,
@@ -16,7 +16,8 @@ import {
   HeaderImage,
 } from "./Header.styles";
 
-const Header = ({ currentUser, hiddenCart }) => {
+
+const Header = ({ currentUser, hiddenCart, signOutStart }) => {
   /* console.log(Logo); */
   return (
     <HeaderContainer>
@@ -27,7 +28,7 @@ const Header = ({ currentUser, hiddenCart }) => {
         <LinkOption to="/shop">SHOP</LinkOption>
         <LinkOption to="/contact">CONTACT</LinkOption>
         {currentUser ? (
-          <LinkOption as="div" onClick={() => auth.signOut()}>
+          <LinkOption as="div" onClick={signOutStart}>
             Sign out
           </LinkOption>
         ) : (
@@ -47,4 +48,8 @@ const mapStatetoProps = (state) => ({
   hiddenCart: selectCartHidden(state),
 });
 
-export default connect(mapStatetoProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart())
+})
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Header);

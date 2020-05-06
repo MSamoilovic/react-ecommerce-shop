@@ -5,7 +5,12 @@ import {
   getUserProfile,
   getCurrentUser,
 } from "../../firebase/firebase-utils";
-import { signinSuccess, signinFailure } from "./user-actions";
+import {
+  signinSuccess,
+  signinFailure,
+  signOutSuccess,
+  signOutFailure,
+} from "./user-actions";
 
 export function* getUserSnapshot(userObj) {
   try {
@@ -46,6 +51,15 @@ export function* isUserAuthenticated() {
   }
 }
 
+export function* signOutUser() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (err) {
+    yield put(signOutFailure())
+  }
+}
+
 export function* onGoogleSigninStart() {
   yield takeLatest("GOOGLE_SIGNIN_START", signInWithGoogle);
 }
@@ -56,6 +70,10 @@ export function* onEmailSigninStart() {
 
 export function* onCheckUserSession() {
   yield takeLatest("CHECK_USER_SESSION", isUserAuthenticated);
+}
+
+export function* onSignoutStart() {
+  yield takeLatest("SIGNOUT_START", signOutUser);
 }
 
 export function* userSagas() {
