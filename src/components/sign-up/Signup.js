@@ -2,7 +2,12 @@ import React from "react";
 import "./Signup.scss";
 import FormInput from "../form-input/FormInput";
 import SubmitButton from "../submit-button/SubmitButton";
-import { auth, getUserProfile } from "../../firebase/firebase-utils";
+import {connect } from 'react-redux'
+import { signupStart} from '../../redux/user/user-actions'
+
+const mapDispatchToProps = dispatch => ({
+  signUpStart: (userCredentials) => dispatch(signupStart(userCredentials))
+})
 
 class SignupForm extends React.Component {
   constructor() {
@@ -19,31 +24,14 @@ class SignupForm extends React.Component {
     event.preventDefault();
 
     const { displayName, email, password, confirmPassword } = this.state;
+    const { signUpStart} = this.props
 
     if (password !== confirmPassword) {
       alert("Please make sure that passwords match");
-
       return;
     }
 
-    try {
-      //kreiranje korisnika
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      //cuvanje korisnika u Firestore preko metoda iz util.js
-      await getUserProfile(user, { displayName });
-      //vracanje state na default vrednosti
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (err) {
-        console.log('Error occured', err)
-    }
+    signUpStart({email, password, displayName})
   };
 
   handleChange = (event) => {
@@ -100,4 +88,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default SignupForm;
+export default connect(null, mapDispatchToProps)(SignupForm);

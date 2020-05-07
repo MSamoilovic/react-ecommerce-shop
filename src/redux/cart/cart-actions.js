@@ -14,5 +14,9 @@ export const clearItemFromCart = item => ({
 
 export const removeItemsFromCheckout = item => ({
     type: 'REMOVE_FROM_CHECKOUT',
-    payload: item
+    payload: item 
+})
+
+export const clearCart = () => ({
+    type: "CLEAR_CART"
 })
