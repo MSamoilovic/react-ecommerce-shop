@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import "./Shop.scss";
 import CollectionPageContainer from "../collection/CollectionPageContainer";
@@ -6,39 +6,16 @@ import { connect } from "react-redux";
 import { fetchCollectionStart } from "../../../redux/shop/shop-actions";
 import CollectionOverviewContainer from "../../collection-overview/CollectionOverviewContainer";
 
-/* const CollectionOverviewWithSpinner = Spinner(CollectionOverview); */
-/* const CollectionPageWithSpinner = Spinner(CollectionPage);
- */
-
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCollection: () => dispatch(fetchCollectionStart()),
 });
 
-class Shop extends React.Component {
-  componentDidMount() {
-    //Observable pattern
-    /* this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
-      async (snapshot) => {
-        const collectionMap = convertSnapshotToObject(snapshot);
-        //console.log(collectionMap)
-        updateCollection(collectionMap);
-        this.setState({ loading: false });
-      }
-    ); */
+const Shop = ({fetchCollection, match}) => {
 
-    //Promise Pattern
-    /* const collectionSnapshot = await collectionRef.get();
-    const collectionMap = convertSnapshotToObject(collectionSnapshot);
-    await updateCollection(collectionMap);
-    this.setState({ loading: false }); */
-
-    const { fetchCollection } = this.props;
-    fetchCollection();
-  }
-
-  render() {
-    const { match } = this.props;
+  useEffect(() => {
+    fetchCollection()
+  }, [fetchCollection])
 
     return (
       <div className="collections-overview">
@@ -57,6 +34,5 @@ class Shop extends React.Component {
       </div>
     );
   }
-}
 
 export default connect(null, mapDispatchToProps)(Shop);
