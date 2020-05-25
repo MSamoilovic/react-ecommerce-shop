@@ -17,7 +17,7 @@ import {
 } from "./Header.styles";
 
 
-const Header = ({ currentUser, hiddenCart, signOutStart }) => {
+export const Header = ({ currentUser, hiddenCart, signOutStart }) => {
   /* console.log(Logo); */
   return (
     <HeaderContainer>
@@ -29,7 +29,7 @@ const Header = ({ currentUser, hiddenCart, signOutStart }) => {
         <LinkOption to="/contact">CONTACT</LinkOption>
         {currentUser ? (
           <LinkOption as="div" onClick={signOutStart}>
-            Sign out
+            SIGN OUT
           </LinkOption>
         ) : (
           <LinkOption to="/signup">SIGN UP</LinkOption>
