@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 
 export const CartDropdown = ({ cartItems, history, dispatch }) => (
   <div className="cart-dropdown">
-    <div className="cart-items">u
+    <div className="cart-items">
       {cartItems.length ? (
         cartItems.map((cartItem) => (
           <CartItem key={cartItem.id} item={cartItem} />
