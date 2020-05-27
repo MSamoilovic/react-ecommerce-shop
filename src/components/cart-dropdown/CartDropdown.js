@@ -4,16 +4,15 @@ import SubmitButton from "../submit-button/SubmitButton";
 import CartItem from "../cart-item/CartItem";
 import { connect } from "react-redux";
 import { selectCartItems } from "../../redux/cart/cart-selectors";
-import { withRouter } from "react-router-dom";
 import { toggleCartHidden } from "../../redux/cart/cart-actions";
 
 const mapStateToProps = (state) => ({
   cartItems: selectCartItems(state),
 });
 
-const CartDropdown = ({ cartItems, history, dispatch }) => (
+export const CartDropdown = ({ cartItems, history, dispatch }) => (
   <div className="cart-dropdown">
-    <div className="cart-items">
+    <div className="cart-items">u
       {cartItems.length ? (
         cartItems.map((cartItem) => (
           <CartItem key={cartItem.id} item={cartItem} />
@@ -33,4 +32,4 @@ const CartDropdown = ({ cartItems, history, dispatch }) => (
   </div>
 );
 
-export default withRouter(connect(mapStateToProps)(CartDropdown));
+export default connect(mapStateToProps)(CartDropdown);
