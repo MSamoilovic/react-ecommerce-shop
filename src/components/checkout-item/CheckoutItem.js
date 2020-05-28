@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
 });
 
-const CheckoutItem = ({ item, clearItem, removeItem, addItem }) => {
+export const CheckoutItem = ({ item, clearItem, removeItem, addItem }) => {
   const { name, price, quantity, imageUrl } = item;
   return (
     <div className="checkout-item">
