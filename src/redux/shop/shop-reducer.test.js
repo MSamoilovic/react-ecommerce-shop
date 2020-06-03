@@ -24,24 +24,20 @@ describe("shopReducer", () => {
       shopReducer(initialState, {
         type: "FETCH_COLLECTION_SUCCESS",
         payload: mockCollection,
-      })
-    ).toEqual({
-      ...initialState,
-      isFetching: false,
-      collections: mockCollection,
-    });
+      }).collections
+    ).toEqual(mockCollection);
   });
 
   it("should set isFetching to false and errorMessage to payload when fetchCollectionFailure is fired", () => {
     expect(
       shopReducer(initialState, {
         type: "FETCH_COLLECTION_FAILURE",
-        payload: 'error',
+        payload: "error",
       })
     ).toEqual({
       ...initialState,
-      isFetching:false,
-      errorMessage: 'error'
+      isFetching: false,
+      errorMessage: "error",
     });
   });
 });
